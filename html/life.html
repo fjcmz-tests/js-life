@@ -1,9 +1,11 @@
 <html>
 <head>
 	<script src="life.js"></script>
+	<link rel="stylesheet" type="text/css" href="life.css">
 </head>
 <body onload="loaded()">
 	<div id="life_main">
+		<h1>Conway's Game of Life</h1>
 		<canvas id="life_canvas" width="1200" height="500">
 		</canvas>
 		<div id="ips">1 iteration per second.</div>
@@ -11,7 +13,9 @@
 		<div id="iterations">No FPS calculated.</div>
 		<button id="reset" onclick="reset()">Reset</button>
 		<button id="pause" onclick="pause()">Pause</button>
-		<button id="advance" onclick="advance()">&gt;</button>
+		<label>Steps to increase:</label>
+		<button id="advance" onclick="advanceOneStep()">&gt;</button>
+		<input id="steps_increase" type="text" />
 		<button id="speedup" onclick="increaseSpeed()">&gt;&gt;</button>
 	</div>
 </body>

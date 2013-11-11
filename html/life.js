@@ -265,16 +265,20 @@ LifeGame.Animator = function(cellWorld, renderer) {
 		this.renderer.render(this.cellWorld, LifeGame.CellSize);
 	}
 
-	this.advance = function() {
+	this.advanceOneStep = function() {
 		if (this.active) {
 			this.pause();
 		}
 		this.oneStep();
 	}
 
-	this.increaseSpeed = function() {
+	this.increaseSpeed = function(steps) {
 		clearInterval(this.intervalRunner);
-		this.ips++;
+		steps = typeof steps !== 'undefined' ? steps : 1;
+		if (isNaN(steps)) {
+			steps = 1;
+		}
+		this.ips += steps;
 		this.intervalRunner = setInterval(animator.animate, 1000 / this.ips);
 		if (this.ipsInfo != null) {
 			this.ipsInfo.textContent = "" + this.ips + " iterations per second.";
@@ -354,12 +358,14 @@ function pause() {
 	animator.pause();
 }
 
-function advance() {
-	animator.advance();
+function advanceOneStep() {
+	animator.advanceOneStep();
 }
 
 function increaseSpeed() {
-	animator.increaseSpeed();
+	stepsToIncrease = document.getElementById("steps_increase").value;
+	stepsToIncrease = parseInt(stepsToIncrease, 10);
+	animator.increaseSpeed(stepsToIncrease);
 }
 
 
